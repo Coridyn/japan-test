@@ -1,8 +1,17 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useHistory,
+} from "react-router-dom";
 import {useState, useEffect, useRef} from 'react';
 import './App.css';
 
 import {Quiz} from './comp/Quiz';
+import {Prompt} from './comp/Prompt';
+
 import useKey from './comp/useKey';
 import {IChar} from './data/data';
 import {QuizState, UiState} from './data/state';
@@ -28,43 +37,46 @@ while running
 
 export interface IAppProps {
   quizState: QuizState,
+  
+  // update state
+  
 }
 
 const App: React.FC<IAppProps> = (props) => {
   
   const {quizState} = props;
+  const history = useHistory();
   
-  const handleKey = (e: KeyboardEvent) => {
-    switch (e.key){
-      case 's':
-        // start
-        break;
-      
-      case 'o':
-        // options
-        break;
-        
-      case 'r':
-        // reset
-        
-        // TODO: Handle remaining items
-        break;
-    }
+  // update state
+  function start(){
+    history.push('/quiz');
   }
-  useKey(handleKey);
-  
   
   return (
     <div className="App">
       
+      <Router>
+        <Switch>
+          <Route path={['/', "/prompt"]}>
+            <Prompt quizOptions={quizState.quizOptions}
+              start={start}
+              updateOptions={newOptions => {
+                console.log('new options', newOptions);
+              }}></Prompt>
+          </Route>
+          
+          <Route path="/options">
+            
+          </Route>
+          
+          <Route path="/quiz">
+            <Quiz allChars={props.quizState.allChars}></Quiz>
+          </Route>
+          
+        </Switch>
+      </Router>
+      
       {/* prompt or run quiz*/}
-      
-      {quizState.uiState === UiState.PROMPT &&
-      <Prompt></Prompt>}
-      
-      {quizState.uiState === UiState.QUIZ &&
-      <Quiz allChars={props.quizState.allChars}></Quiz>
-      }
       
     </div>
   );

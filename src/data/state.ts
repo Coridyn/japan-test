@@ -10,28 +10,25 @@ export enum UiState {
 
 // different combos...
 export enum KanaGroup {
-    ALL = 'all',
+    // ALL = 'all',
     
     HIRAGANA = 0x0001,
     KATAKANA = 0x0010,
     
     MODIFIERS = 0x0100,
-    
-    //
 }
 export type QuizOptions = {
-    
-    
-    looksLike: boolean,
+    kanaGroups: number
 };
 
 // prompt, quiz, reset
 
 export type QuizState = {
     uiState: UiState,
-    //options
+    quizOptions: QuizOptions,
     
     allChars: IChar[],
+    selectedChars: IChar[],
 };
 
 export function getState(): QuizState {
@@ -41,7 +38,12 @@ export function getState(): QuizState {
     const state: QuizState = {
         // maintain order of items?
         uiState: UiState.PROMPT,
+        quizOptions: {
+            // exclude modifiers
+            kanaGroups: KanaGroup.HIRAGANA | KanaGroup.KATAKANA,
+        },
         allChars: allChars,
+        selectedChars: allChars.concat(),
     };
     return state;
 }
