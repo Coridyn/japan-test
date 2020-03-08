@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 
-import allChars from './data/data';
+import {getState} from './data/state';
 
-ReactDOM.render(<App {...{allChars: allChars}} />, document.getElementById('root'));
+// get from localStorage
+const state = getState();
+
+ReactDOM.render(<App quizState={state} />, document.getElementById('root'));
 

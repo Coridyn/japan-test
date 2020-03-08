@@ -2,7 +2,10 @@ import React from 'react';
 import {useState, useEffect, useRef} from 'react';
 import './App.css';
 
+import {Quiz} from './comp/Quiz';
+import useKey from './comp/useKey';
 import {IChar} from './data/data';
+import {QuizState, UiState} from './data/state';
 
 
 // state handling
@@ -22,82 +25,46 @@ while running
   allow y/n answer to be entered
 */
 
-function randomInt(max: number, min: number = 0): number {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-
-// TODO: Keep track of seen characters
-const getNextChar = (chars: IChar[]): IChar => {
-  const index = randomInt(chars.length - 1);
-  const nextChar = chars[index];
-  chars.splice(index, 1);
-  
-  return nextChar;
-}
-
 
 export interface IAppProps {
-  allChars: IChar[],
+  quizState: QuizState,
 }
 
 const App: React.FC<IAppProps> = (props) => {
-  const [chars] = useState(() => {
-    return props.allChars.concat();
-  });
   
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [curChar, setChar] = useState(() => {
-    const firstChar = getNextChar(chars);
-    return firstChar;
-  });
+  const {quizState} = props;
   
-  const handleKey = (keyCode: number) => {
-    switch (keyCode){
-      case 32: // space
-        if (!showAnswer){
-          setShowAnswer(true);
-        } else {
-          setShowAnswer(false);
-          const nextChar = getNextChar(chars);
-          setChar(nextChar);
-          
-          // TODO: Handle remaining items
-        }
+  const handleKey = (e: KeyboardEvent) => {
+    switch (e.key){
+      case 's':
+        // start
+        break;
+      
+      case 'o':
+        // options
+        break;
+        
+      case 'r':
+        // reset
+        
+        // TODO: Handle remaining items
         break;
     }
   }
-  
-  const handleKeyRef = useRef<Function | null>(null);
-  handleKeyRef.current = handleKey;
-  
-  useEffect(() => {
-    document.addEventListener('keydown', (e) => {
-      handleKeyRef.current!(e.keyCode);
-    });
-  }, []);
+  useKey(handleKey);
   
   
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-      </header> */}
       
-      <h2>
-        Current character is: <span>{curChar.id}</span>
-      </h2>
+      {/* prompt or run quiz*/}
       
-      {showAnswer && 
-      <h1 className="answer">
-        <div>Hiragana: {curChar.h}</div>
-        <div>Katakana: {curChar.k}</div>
-      </h1>
+      {quizState.uiState === UiState.PROMPT &&
+      <Prompt></Prompt>}
+      
+      {quizState.uiState === UiState.QUIZ &&
+      <Quiz allChars={props.quizState.allChars}></Quiz>
       }
-      
-      <div>({chars.length} remaining)</div>
       
     </div>
   );

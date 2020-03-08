@@ -1,7 +1,9 @@
 export interface IChar {
   id: string,
   h: string,
+  "hLooksLike"?: string[],
   k: string,
+  "kLooksLike"?: string[],
 }
 
 // https://en.wikipedia.org/wiki/Hiragana_(Unicode_block)
@@ -45,7 +47,8 @@ const chars: IChar[] = [
     {
       "id": "KI",
       "h": "き",
-      "k": "キ"
+      "k": "キ",
+      "hLooksLike": ["sa"]
     },
     {
       "id": "GI",
@@ -65,7 +68,8 @@ const chars: IChar[] = [
     {
       "id": "KE",
       "h": "け",
-      "k": "ケ"
+      "k": "ケ",
+      "hLooksLike": ["ha"]
     },
     {
       "id": "GE",
@@ -85,7 +89,9 @@ const chars: IChar[] = [
     {
       "id": "SA",
       "h": "さ",
-      "k": "サ"
+      "k": "サ",
+      "hLooksLike": ["ki"],
+      "kLooksLike": ["se"]
     },
     {
       "id": "ZA",
@@ -95,7 +101,8 @@ const chars: IChar[] = [
     {
       "id": "SI",
       "h": "し",
-      "k": "シ"
+      "k": "シ",
+      "kLooksLike": ["tsu", "so"]
     },
     {
       "id": "ZI",
@@ -115,7 +122,8 @@ const chars: IChar[] = [
     {
       "id": "SE",
       "h": "せ",
-      "k": "セ"
+      "k": "セ",
+      "kLooksLike": ["ya"]
     },
     {
       "id": "ZE",
@@ -135,7 +143,8 @@ const chars: IChar[] = [
     {
       "id": "TA",
       "h": "た",
-      "k": "タ"
+      "k": "タ",
+      "kLooksLike": ["a"]
     },
     {
       "id": "DA",
@@ -145,7 +154,8 @@ const chars: IChar[] = [
     {
       "id": "TI",
       "h": "ち",
-      "k": "チ"
+      "k": "チ",
+      "kLooksLike": [""]
     },
     {
       "id": "DI",
@@ -165,7 +175,8 @@ const chars: IChar[] = [
     {
       "id": "TE",
       "h": "て",
-      "k": "テ"
+      "k": "テ",
+      "kLooksLike": ["chi"]
     },
     {
       "id": "DE",
@@ -175,7 +186,8 @@ const chars: IChar[] = [
     {
       "id": "TO",
       "h": "と",
-      "k": "ト"
+      "k": "ト",
+      "kLooksLike": ["hi"]
     },
     {
       "id": "DO",
@@ -195,11 +207,14 @@ const chars: IChar[] = [
     {
       "id": "NU",
       "h": "ぬ",
-      "k": "ヌ"
+      "hLooksLike": ["me", "ne"],
+      "k": "ヌ",
+      "kLooksLike": ["su", "me"]
     },
     {
       "id": "NE",
       "h": "ね",
+      "hLooksLike": ["re", ],
       "k": "ネ"
     },
     {
@@ -210,6 +225,7 @@ const chars: IChar[] = [
     {
       "id": "HA",
       "h": "は",
+      "hLooksLike": ["ho"],
       "k": "ハ"
     },
     {
@@ -225,7 +241,8 @@ const chars: IChar[] = [
     {
       "id": "HI",
       "h": "ひ",
-      "k": "ヒ"
+      "k": "ヒ",
+      "kLooksLike": ["to"]
     },
     {
       "id": "BI",
@@ -240,7 +257,8 @@ const chars: IChar[] = [
     {
       "id": "HU",
       "h": "ふ",
-      "k": "フ"
+      "k": "フ",
+      "kLooksLike": ["fu"]
     },
     {
       "id": "BU",
@@ -270,7 +288,9 @@ const chars: IChar[] = [
     {
       "id": "HO",
       "h": "ほ",
-      "k": "ホ"
+      "hLooksLike": ["ha", "ke"],
+      "k": "ホ",
+      "kLooksLike": ["o", "wo"]
     },
     {
       "id": "BO",
@@ -285,7 +305,8 @@ const chars: IChar[] = [
     {
       "id": "MA",
       "h": "ま",
-      "k": "マ"
+      "k": "マ",
+      "kLooksLike": ["mu"]
     },
     {
       "id": "MI",
@@ -300,7 +321,9 @@ const chars: IChar[] = [
     {
       "id": "ME",
       "h": "め",
-      "k": "メ"
+      "hLooksLike": ["nu"],
+      "k": "メ",
+      "kLooksLike": ["nu"]
     },
     {
       "id": "MO",
@@ -310,11 +333,13 @@ const chars: IChar[] = [
     {
       "id": "YA",
       "h": "や",
-      "k": "ヤ"
+      "k": "ヤ",
+      "kLooksLike": ["ma"]
     },
     {
       "id": "YU",
       "h": "ゆ",
+      "hLooksLike": ["ne", "re", "wa"],
       "k": "ユ"
     },
     {
@@ -325,11 +350,13 @@ const chars: IChar[] = [
     {
       "id": "RA",
       "h": "ら",
-      "k": "ラ"
+      "k": "ラ",
+      "kLooksLike": ["fu"]
     },
     {
       "id": "RI",
       "h": "り",
+      "hLooksLike": ["i"],
       "k": "リ"
     },
     {
